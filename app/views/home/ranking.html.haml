@@ -1,0 +1,11 @@
+%h1.text-center="This week top commenters"
+%table.table.table-striped.table-bordered
+  %tr
+    %th Ranking
+    %th User  
+    %th Written comments  
+  -@users.each_with_index do |hash, index|
+    %tr
+      %td=index + 1
+      %td=hash[0].name
+      %td=hash[1]      
