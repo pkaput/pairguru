@@ -1,5 +1,19 @@
 %h1= @movie.title
 .jumbotron
   = @movie.description
+-if user_has_no_comments?
+  =render partial: 'comment/new'
+  %br  
+.card
+  .list-group.list-group-flush
+    - @comments.each do |comment|
+      %li.list-group-item
+        %p
+          %b=comment.user.name
+          %small=time_ago(comment)
+        %p
+          %big=comment.text
+        - if user_comment? comment
+          =render partial: 'comment/destroy'   
 - if user_signed_in?
   %p= link_to 'Email me details about this movie', send_info_movie_path(@movie), class: 'btn btn-sm btn-default'
